@@ -21,16 +21,14 @@ import okhttp3.Response;
 import static com.example.rafal.pressreview.Utilities.RetriveMyApplicationContext.getAppContext;
 
 /**
- * Created by Rafal on 6/27/2017.
+ * Created by Rafal on 7/10/2017.
  */
 
-public class DataRequest {
+public class ProviderDataRequest {
 
-    //NewsDatabaseHelper newsDatabaseHelper = new NewsDatabaseHelper(getAppContext());
     private final OkHttpClient client = new OkHttpClient();
     private String jsonResponse;
-    private final String LOG_TAG = DataRequest.class.getSimpleName();
-    Uri BASE_CONTENT_URI = Uri.parse("content://rafal.pressreview/news");
+    Uri BASE_CONTENT_URI = Uri.parse("content://rafal.pressreview/providers");
     ContentResolver resolver = getAppContext().getContentResolver();
     ContentValues values = new ContentValues();
 
@@ -51,26 +49,30 @@ public class DataRequest {
 
                 Headers responseHeaders = response.headers();
                 for (int i = 0, size = responseHeaders.size(); i < size; i++) {
-                    Log.v(LOG_TAG, responseHeaders.name(i) + ": " + responseHeaders.value(i));
                 }
 
                 jsonResponse = response.body().string();
 
-                try {
-                    JSONObject rootJsonObject = new JSONObject(jsonResponse);
-                    JSONArray articleJsonArray = rootJsonObject.getJSONArray("articles");
-                    //newsDatabaseHelper.dropAndRecreateNewsTable();
-                    for (int i = 0; i < articleJsonArray.length(); i++){
-                        JSONObject articleDataJsonObject = articleJsonArray.getJSONObject(i);
-                        String title = articleDataJsonObject.getString("title");
-                        String description = articleDataJsonObject.getString("description");
-                        String articleUrl = articleDataJsonObject.getString("url");
-                        String imageUrl = articleDataJsonObject.getString("urlToImage");
 
-                        values.put(NewsDatabaseHelper.TITLE, title);
-                        values.put(NewsDatabaseHelper.DESCRIPTION, description);
-                        values.put(NewsDatabaseHelper.ARTICLE_URL, articleUrl);
-                        values.put(NewsDatabaseHelper.IMAGE_URL, imageUrl);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonResponse);
+                    JSONArray jsonArray = jsonObject.getJSONArray("sources");
+
+                    for (int i = 0; i < jsonArray.length(); i++){
+
+                        JSONObject providerJsonObject = jsonArray.getJSONObject(i);
+                        String providerID = providerJsonObject.getString("id");
+                        String providerName = providerJsonObject.getString("name");
+                        String providerDescription = providerJsonObject.getString("description");
+                        String providerLanguage = providerJsonObject.getString("language");
+                        String providerCategory = providerJsonObject.getString("category");
+
+                        values.put(NewsDatabaseHelper.PROVIDER_ID, providerID);
+                        values.put(NewsDatabaseHelper.PROVIDER_NAME, providerName);
+                        values.put(NewsDatabaseHelper.PROVIDER_DESCRIPTION, providerDescription);
+                        values.put(NewsDatabaseHelper.PROVIDER_LANGUAGE, providerLanguage);
+                        values.put(NewsDatabaseHelper.PROVIDER_CATEGORY, providerCategory);
 
                         resolver.insert(BASE_CONTENT_URI, values);
                     }
@@ -81,6 +83,4 @@ public class DataRequest {
         });
     }
 }
-
-
 

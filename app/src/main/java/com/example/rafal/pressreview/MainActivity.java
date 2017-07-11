@@ -4,11 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.*;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.example.rafal.pressreview.Data.NewsDatabaseHelper;
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
@@ -16,13 +14,12 @@ import com.kekstudio.dachshundtablayout.DachshundTabLayout;
 import static com.example.rafal.pressreview.Utilities.RetriveMyApplicationContext.getAppContext;
 
 public class MainActivity extends AppCompatActivity {
-    PagerAdapter pagerAdapter;
     NewsDatabaseHelper newsDatabaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         newsDatabaseHelper = new NewsDatabaseHelper(getAppContext());
-        newsDatabaseHelper.dropAndRecreateDatabase();
+        newsDatabaseHelper.dropAndRecreateNewsTable();
         setContentView(R.layout.activity_main);
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
@@ -66,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy(){
         super.onDestroy();
-        newsDatabaseHelper = new NewsDatabaseHelper(getAppContext());
-        newsDatabaseHelper.dropAndRecreateDatabase();
         Log.v("DESTROYING", "BADOOM");
     }
 }

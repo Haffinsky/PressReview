@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rafal.pressreview.Data.DataRequest;
+import com.example.rafal.pressreview.Data.NewsDatabaseHelper;
 import com.example.rafal.pressreview.Data.NewsListAdapter;
 
 import static com.example.rafal.pressreview.Data.NewsContentProvider.CONTENT_AUTHORITY;
@@ -22,6 +23,7 @@ import static com.example.rafal.pressreview.Data.NewsDatabaseHelper.ARTICLE_URL;
 import static com.example.rafal.pressreview.Data.NewsDatabaseHelper.DESCRIPTION;
 import static com.example.rafal.pressreview.Data.NewsDatabaseHelper.IMAGE_URL;
 import static com.example.rafal.pressreview.Data.NewsDatabaseHelper.TITLE;
+import static com.example.rafal.pressreview.Data.NewsDatabaseHelper.ID;
 import static com.example.rafal.pressreview.Utilities.RetriveMyApplicationContext.getAppContext;
 import static com.example.rafal.pressreview.Utilities.Urls.AL_JAZEERA_ENGLISH_URL;
 import static com.example.rafal.pressreview.Utilities.Urls.BBC_URL;
@@ -36,7 +38,7 @@ import static com.example.rafal.pressreview.Utilities.Urls.WASHINGTONPOST_URL;
 
 
 public class NewslistFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    String[] projection = {TITLE, DESCRIPTION, ARTICLE_URL, IMAGE_URL};
+    String[] projection = {ID, TITLE, DESCRIPTION, ARTICLE_URL, IMAGE_URL};
     Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY + "/news");
     private static final int NEWS_LOADER = 0;
     NewsListAdapter adapter;
