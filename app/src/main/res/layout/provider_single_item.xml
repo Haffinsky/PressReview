@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     android:elevation="6dp"
-    android:background="#607D8B"
+    android:background="#424242"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="110dp">
 
 
     <ImageView
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
+        android:layout_margin="10dp"
         android:id="@+id/provider_brand_view"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:text="PROVIDER"
         android:textColor="#FFFF"
         android:ellipsize="end"
@@ -38,6 +39,7 @@
         android:text="DESCRIPTION"
         android:textSize="16sp"
         android:textColor="#FFFF"
+        android:layout_margin="8dp"
         android:id="@+id/provider_description_view"
         />
 </LinearLayout>

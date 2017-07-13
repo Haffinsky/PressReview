@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rafal.pressreview.R;
+import com.example.rafal.pressreview.Utilities.Iconize;
 import com.squareup.picasso.Picasso;
 
 import static com.example.rafal.pressreview.Utilities.RetriveMyApplicationContext.getAppContext;
@@ -23,6 +24,7 @@ import static com.example.rafal.pressreview.Utilities.RetriveMyApplicationContex
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
+    Iconize iconize;
     Context mContext;
     Cursor mCursor;
     Resources resources;
@@ -54,7 +56,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         holder.newsTitleView.setText(mCursor.getString(1));
 
         //setting icons
-        iconize(mCursor.getString(3), holder);
+        Iconize.iconize(mCursor.getString(3), holder, resources);
 
 
   }
@@ -73,7 +75,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {;
         private TextView newsTitleView;
         private ImageView newsImageView;
-        private ImageView providerImageView;
+        public ImageView providerImageView;
 
 
         public ViewHolder(View itemView) {
@@ -94,7 +96,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
             getAppContext().startActivity(intent);
         }
     }
-    public void iconize(String urlExtract, ViewHolder holder){
+    /*public void iconize(String urlExtract, ViewHolder holder){
         if(urlExtract.contains("bbc")) {
             holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.bbc_news));
         } else if (urlExtract.contains("cnn")){
@@ -118,5 +120,5 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         } else {
             holder.providerImageView.setImageDrawable(null);
         }
-    }
+    }*/
 }

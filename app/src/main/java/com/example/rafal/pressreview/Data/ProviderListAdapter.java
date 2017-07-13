@@ -12,15 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rafal.pressreview.R;
+import com.example.rafal.pressreview.Utilities.Iconize;
 
 /**
  * Created by Rafal on 7/11/2017.
  */
 
 public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapter.ViewHolder> {
+
     Context mContext;
     Cursor mCursor;
     Resources resources;
+    Iconize iconize;
 
     public ProviderListAdapter(Context context){
         mContext = context;
@@ -39,7 +42,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
         holder.providerNameTextView.setText(mCursor.getString(2));
         holder.providerDescriptionView.setText(mCursor.getString(3));
 
-        Log.v("CURSOREK", mCursor.getString(1));
+        Iconize.iconizeProviderView(mCursor.getString(1), holder, resources);
 
     }
 
@@ -59,7 +62,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView providerNameTextView;
         private TextView providerDescriptionView;
-        private ImageView providerBrandImageView;
+        public ImageView providerBrandImageView;
 
 
         public ViewHolder(View itemView) {
@@ -73,10 +76,5 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
         @Override
         public void onClick(View v) {
         }
-    }
-
-
-    public void iconizeProviderBrandView(String id){
-
     }
 }
