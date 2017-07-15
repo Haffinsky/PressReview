@@ -80,10 +80,9 @@ public class NewslistFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_newslist, container, false);
 
         getLoaderManager().initLoader(NEWS_LOADER, null, this);
-
-        View rootView = inflater.inflate(R.layout.fragment_newslist, container, false);
 
         newslistRecyclerView = (RecyclerView) rootView.findViewById(R.id.newslist);
         newslistRecyclerView.setLayoutManager(new LinearLayoutManager(
@@ -107,7 +106,7 @@ public class NewslistFragment extends Fragment implements LoaderManager.LoaderCa
                         projection,
                         null,
                         null,
-                        null
+                        "RANDOM()"
                 );
             default:
                 return null;

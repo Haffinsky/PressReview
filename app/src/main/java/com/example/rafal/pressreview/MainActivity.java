@@ -26,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        newsDatabaseHelper = new NewsDatabaseHelper(getAppContext());
+        newsDatabaseHelper.dropAndRecreateNewsTable();
+        newsDatabaseHelper.dropAndRecreateProviderTable();
+        newsDatabaseHelper.dropAndRecreateProviderNewsTable();
+
         setContentView(R.layout.activity_main);
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
@@ -74,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy(){
         super.onDestroy();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        Log.v("ON STOP", "ACTTIVITY STOPPED");
         newsDatabaseHelper = new NewsDatabaseHelper(getAppContext());
         newsDatabaseHelper.dropAndRecreateNewsTable();
         newsDatabaseHelper.dropAndRecreateProviderTable();

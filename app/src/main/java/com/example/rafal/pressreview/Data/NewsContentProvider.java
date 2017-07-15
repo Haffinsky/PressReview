@@ -115,7 +115,7 @@ public class NewsContentProvider extends ContentProvider {
         long id = 0;
         switch (uriType) {
             case NEWS:
-                id = db.insert(NewsDatabaseHelper.TABLE_NAME, null, values);
+                id = db.insertWithOnConflict(NewsDatabaseHelper.TABLE_NAME, null, values, db.CONFLICT_REPLACE);
                 returnUri = Uri.parse(PATH_NEWS + "/" + id);
                 break;
             case PROVIDERS:
