@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.rafal.pressreview.SingleProviderNews">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/icon_view_height"
+        android:background="@color/icon_view_background"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/icon_view_horizontal_padding"
+            android:paddingLeft="@dimen/icon_view_vertical_padding"
+            android:paddingTop="@dimen/icon_view_horizontal_padding"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_white" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/activity_single_provider_news"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</android.support.design.widget.CoordinatorLayout>
+
+

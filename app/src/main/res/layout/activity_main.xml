@@ -4,13 +4,26 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
+    android:background="@color/icon_view_background"
     android:layout_height="match_parent"
     tools:context="com.example.rafal.pressreview.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/icon_view_background"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/icon_view_height"
+            android:src="@drawable/logo_white"
+            android:scaleType="fitCenter"
+            android:paddingTop="@dimen/icon_view_horizontal_padding"
+            android:paddingBottom="@dimen/icon_view_horizontal_padding"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             custom:ddAnimatedIndicator="dachshund"
-            custom:ddIndicatorHeight="6dp"
+            custom:ddIndicatorHeight="@dimen/indicator_height"
             custom:ddIndicatorColor="@android:color/white"
             custom:tabMode="fixed"/>
 

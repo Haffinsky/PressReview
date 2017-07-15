@@ -6,13 +6,8 @@ import android.content.Context;
 /**
  * Created by Rafal on 4/5/2017.
  */
-
+//helper class used to retrieve application context in fragments and non activity classes
 public class RetriveMyApplicationContext extends Application {
-
-   /*Don't forget to mention RetriveMyApplicationContext Class in Manifests    File otherwise it will throw NullPointer Exception
-    <application
-    android:name=".volley.RetriveMyApplicationContext"*/
-
 
     private static RetriveMyApplicationContext mRetriveMyApplicationContext;
 

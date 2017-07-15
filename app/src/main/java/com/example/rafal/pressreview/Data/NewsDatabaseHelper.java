@@ -28,6 +28,11 @@ public class NewsDatabaseHelper extends SQLiteOpenHelper {
     public static final String PROVIDER_LANGUAGE = "provider_language";
     public static final String PROVIDER_CATEGORY = "provider_category";
 
+    static final String PROVIDER_NEWS_TABLE_NAME = "providerNews";
+    public static final String PROVIDER_NEWS_TITLE = "title";
+    public static final String PROVIDER_ARTICLE_URL = "articleUrl";
+    public static final String PROVIDER_IMAGE_URL = "imageUrl";
+
 
     String SQL_CREATE_NEWS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
             ID + " INTEGER PRIMARY KEY, " +
@@ -49,7 +54,17 @@ public class NewsDatabaseHelper extends SQLiteOpenHelper {
             PROVIDER_CATEGORY + " TEXT NOT NULL " +
             " );";
 
+
     String SQL_DROP_PROVIDER_TABLE = "DROP TABLE IF EXISTS " + PROVIDER_TABLE_NAME;
+
+    String SQL_CREATE_PROVIDER_NEWS_TABLE = "CREATE TABLE IF NOT EXISTS " + PROVIDER_NEWS_TABLE_NAME + " (" +
+            ID + " INTEGER PRIMARY KEY, " +
+            PROVIDER_NEWS_TITLE + " TEXT NOT NULL, " +
+            PROVIDER_ARTICLE_URL + " TEXT NOT NULL, " +
+            PROVIDER_IMAGE_URL + " TEXT NOT NULL " +
+            " );";
+
+    String SQL_DROP_PROVIDER_NEWS_TABLE = "DROP TABLE IF EXISTS " + PROVIDER_NEWS_TABLE_NAME;
 
     public NewsDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -60,12 +75,14 @@ public class NewsDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_NEWS_TABLE);
         db.execSQL(SQL_CREATE_PROVIDER_TABLE);
+        db.execSQL(SQL_CREATE_PROVIDER_NEWS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DROP_NEWS_TABLE);
         db.execSQL(SQL_DROP_PROVIDER_TABLE);
+        db.execSQL(SQL_DROP_PROVIDER_NEWS_TABLE);
         onCreate(db);
     }
 
@@ -80,5 +97,10 @@ public class NewsDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(SQL_DROP_PROVIDER_TABLE);
         db.execSQL(SQL_CREATE_PROVIDER_TABLE);
+    }
+    public void dropAndRecreateProviderNewsTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(SQL_DROP_PROVIDER_NEWS_TABLE);
+        db.execSQL(SQL_CREATE_PROVIDER_NEWS_TABLE);
     }
 }

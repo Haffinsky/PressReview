@@ -3,7 +3,7 @@ package com.example.rafal.pressreview.Utilities;
 /**
  * Created by Rafal on 4/14/2017.
  */
-
+//urls to specific data sources
 public class Urls {
     public static final String BBC_URL = "https://newsapi.org/v1/articles?" +
             "source=bbc-news" +

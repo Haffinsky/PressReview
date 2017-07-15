@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,41 +13,47 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rafal.pressreview.R;
-import com.example.rafal.pressreview.SingleProviderNews;
-import com.example.rafal.pressreview.SingleProviderNewsFragment;
-import com.example.rafal.pressreview.Utilities.Iconize;
+import com.squareup.picasso.Picasso;
 
 import static com.example.rafal.pressreview.Utilities.RetriveMyApplicationContext.getAppContext;
 
 /**
- * Created by Rafal on 7/11/2017.
+ * Created by Rafal on 7/14/2017.
  */
 
-public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapter.ViewHolder> {
+public class SingleProviderAdapter extends RecyclerView.Adapter<SingleProviderAdapter.ViewHolder> {
 
     Context mContext;
     Cursor mCursor;
     Resources resources;
-    Iconize iconize;
+    DataRequest dataRequest;
 
-    public ProviderListAdapter(Context context) {
+    public SingleProviderAdapter(Context context) {
         mContext = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View root = LayoutInflater.from(mContext).inflate(R.layout.provider_single_item, parent, false);
-        return new ProviderListAdapter.ViewHolder(root);
+        View root = LayoutInflater.from(mContext).inflate(R.layout.single_provider_news_item, parent, false);
+        return new ViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         mCursor.moveToPosition(position);
-        resources = mContext.getResources();
-        holder.providerNameTextView.setText(mCursor.getString(2));
-        holder.providerDescriptionView.setText(mCursor.getString(3));
 
-        Iconize.iconizeProviderView(mCursor.getString(1), holder, resources);
+        dataRequest = new DataRequest();
+        resources = mContext.getResources();
+
+        if (mCursor.getString(3).isEmpty()) {
+            holder.singleProviderNewsImageView.setImageDrawable(resources.getDrawable(R.drawable.no_image));
+        } else {
+            Picasso.with(mContext).load(mCursor.getString(3)).into(holder.singleProviderNewsImageView);
+        }
+
+        holder.singleProviderNewsTitleView.setText(mCursor.getString(1));
+
+        //setting icons
 
     }
 
@@ -63,27 +69,26 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
         this.notifyDataSetChanged();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView providerNameTextView;
-        private TextView providerDescriptionView;
-        public ImageView providerBrandImageView;
-
+        ;
+        private TextView singleProviderNewsTitleView;
+        private ImageView singleProviderNewsImageView;
+        public ImageView singleProviderNewsThumbView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            providerNameTextView = (TextView) itemView.findViewById(R.id.provider_name_view);
-            providerDescriptionView = (TextView) itemView.findViewById(R.id.provider_description_view);
-            providerBrandImageView = (ImageView) itemView.findViewById(R.id.provider_brand_view);
+            singleProviderNewsImageView = (ImageView) itemView.findViewById(R.id.single_provider_news_image_view);
+            singleProviderNewsTitleView = (TextView) itemView.findViewById(R.id.single_provider_news_title_view);
+            singleProviderNewsThumbView = (ImageView) itemView.findViewById(R.id.single_provider_thumb_view);
         }
 
         @Override
         public void onClick(View v) {
             mCursor.moveToPosition(getAdapterPosition());
-            Intent intent = new Intent(getAppContext(), SingleProviderNews.class);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(mCursor.getString(2)));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("provider_id", mCursor.getString(1));
             getAppContext().startActivity(intent);
         }
     }

@@ -52,14 +52,11 @@ public class ProviderDataRequest {
                 }
 
                 jsonResponse = response.body().string();
-
-
-
                 try {
                     JSONObject jsonObject = new JSONObject(jsonResponse);
                     JSONArray jsonArray = jsonObject.getJSONArray("sources");
 
-                    for (int i = 0; i < jsonArray.length(); i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject providerJsonObject = jsonArray.getJSONObject(i);
                         String providerID = providerJsonObject.getString("id");

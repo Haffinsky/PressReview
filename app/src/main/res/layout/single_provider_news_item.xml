@@ -10,29 +10,29 @@
 
 
         <ImageView
-            android:id="@+id/news_image_view"
+            android:id="@+id/single_provider_news_image_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_view_height"
             android:scaleType="centerCrop" />
 
         <ImageView
-            android:id="@+id/provider_thumb_view"
+            android:id="@+id/single_provider_thumb_view"
             android:layout_width="@dimen/icon_vertical_dimensions"
             android:layout_height="@dimen/icon_vertical_dimensions"
-            android:layout_alignRight="@+id/news_image_view"
+            android:layout_alignRight="@+id/single_provider_news_image_view"
             android:layout_margin="@dimen/icon_margin"
             android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/news_image_view"
+            android:layout_alignBottom="@+id/single_provider_news_image_view"
             android:background="#99000000"
             android:orientation="vertical"
             android:paddingBottom="@dimen/shade_padding_bottom">
 
             <TextView
-                android:id="@+id/news_title_view"
+                android:id="@+id/single_provider_news_title_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"

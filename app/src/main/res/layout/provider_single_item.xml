@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_marginBottom="10dp"
-    android:elevation="6dp"
-    android:background="#424242"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="@dimen/provider_vertical_margins"
+    android:layout_marginRight="@dimen/provider_vertical_margins"
+    android:background="#EEEEEE"
+    android:elevation="@dimen/provider_horizontal_margins"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="110dp">
 
 
-    <ImageView
-        android:layout_width="110dp"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:layout_margin="10dp"
-        android:id="@+id/provider_brand_view"
-        />
+        <ImageView
+            android:id="@+id/provider_brand_view"
+            android:layout_width="@dimen/provider_layout_height"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/icon_view_horizontal_padding"
+            android:layout_marginLeft="@dimen/provider_vertical_margins"
+            android:layout_marginRight="@dimen/provider_vertical_margins"
+            android:layout_marginTop="@dimen/icon_view_horizontal_padding"
+            android:scaleType="fitXY" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:textSize="30sp"
-        android:text="PROVIDER"
-        android:textColor="#FFFF"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:gravity="center"
-        android:id="@+id/provider_name_view"
-        />
+        <TextView
+            android:id="@+id/provider_name_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/provider_name_layout_height"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="PROVIDER"
+            android:textColor="#000"
+            android:textSize="34sp" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/provider_description_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/provider_textview_margin_bottom"
+        android:layout_marginLeft="@dimen/icon_view_horizontal_padding"
+        android:layout_marginRight="@dimen/icon_view_horizontal_padding"
         android:text="DESCRIPTION"
-        android:textSize="16sp"
-        android:textColor="#FFFF"
-        android:layout_margin="8dp"
-        android:id="@+id/provider_description_view"
-        />
+        android:textColor="#000"
+        android:textSize="14sp" />
 </LinearLayout>

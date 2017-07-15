@@ -1,6 +1,10 @@
 package com.example.rafal.pressreview.Utilities;
 
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.os.Build;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.rafal.pressreview.Data.NewsListAdapter;
 import com.example.rafal.pressreview.Data.ProviderListAdapter;
@@ -12,7 +16,7 @@ import com.example.rafal.pressreview.R;
 
 public class Iconize {
 
-
+        //set relevant icon if the url contains a specific key
     public static void iconize(String urlExtract, NewsListAdapter.ViewHolder holder, Resources resources){
         if(urlExtract.contains("bbc")) {
             holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.bbc_news));
@@ -38,6 +42,7 @@ public class Iconize {
             holder.providerImageView.setImageDrawable(null);
         }
     }
+        //set relevant icon if provider_id is equal to a specific key
     public static void iconizeProviderView(String urlExtract, ProviderListAdapter.ViewHolder holder, Resources resources){
         if(urlExtract.equals("abc-news-au")) {
             holder.providerBrandImageView.setImageDrawable(resources.getDrawable(R.drawable.abc_news));
@@ -182,6 +187,13 @@ public class Iconize {
         }
         else {
             holder.providerBrandImageView.setImageDrawable(null);
+        }
+    }
+        //turn the sysetm bar black (applies to api above 21)
+    public void blackenSystemBar(Window window){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
         }
     }
 }

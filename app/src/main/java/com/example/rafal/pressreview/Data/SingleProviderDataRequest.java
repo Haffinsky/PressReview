@@ -21,15 +21,14 @@ import okhttp3.Response;
 import static com.example.rafal.pressreview.Utilities.RetriveMyApplicationContext.getAppContext;
 
 /**
- * Created by Rafal on 6/27/2017.
+ * Created by Rafal on 7/14/2017.
  */
 
-public class DataRequest {
+public class SingleProviderDataRequest {
 
     private final OkHttpClient client = new OkHttpClient();
     private String jsonResponse;
-    private final String LOG_TAG = DataRequest.class.getSimpleName();
-    Uri BASE_CONTENT_URI = Uri.parse("content://rafal.pressreview/news");
+    Uri BASE_CONTENT_URI = Uri.parse("content://rafal.pressreview/providerNews");
     ContentResolver resolver = getAppContext().getContentResolver();
     ContentValues values = new ContentValues();
 
@@ -50,7 +49,6 @@ public class DataRequest {
 
                 Headers responseHeaders = response.headers();
                 for (int i = 0, size = responseHeaders.size(); i < size; i++) {
-                    Log.v(LOG_TAG, responseHeaders.name(i) + ": " + responseHeaders.value(i));
                 }
 
                 jsonResponse = response.body().string();
@@ -62,14 +60,12 @@ public class DataRequest {
                     for (int i = 0; i < articleJsonArray.length(); i++) {
                         JSONObject articleDataJsonObject = articleJsonArray.getJSONObject(i);
                         String title = articleDataJsonObject.getString("title");
-                        String description = articleDataJsonObject.getString("description");
                         String articleUrl = articleDataJsonObject.getString("url");
                         String imageUrl = articleDataJsonObject.getString("urlToImage");
 
-                        values.put(NewsDatabaseHelper.TITLE, title);
-                        values.put(NewsDatabaseHelper.DESCRIPTION, description);
-                        values.put(NewsDatabaseHelper.ARTICLE_URL, articleUrl);
-                        values.put(NewsDatabaseHelper.IMAGE_URL, imageUrl);
+                        values.put(NewsDatabaseHelper.PROVIDER_NEWS_TITLE, title);
+                        values.put(NewsDatabaseHelper.PROVIDER_ARTICLE_URL, articleUrl);
+                        values.put(NewsDatabaseHelper.PROVIDER_IMAGE_URL, imageUrl);
 
                         resolver.insert(BASE_CONTENT_URI, values);
                     }
@@ -80,6 +76,4 @@ public class DataRequest {
         });
     }
 }
-
-
 

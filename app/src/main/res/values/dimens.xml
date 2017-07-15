@@ -2,4 +2,26 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <!--View pager dimensions -->
+    <dimen name="indicator_height">6dp</dimen>
+    <!-- Icon view dimensions-->
+    <dimen name="icon_view_horizontal_padding">5dp</dimen>
+    <dimen name="icon_view_vertical_padding">20dp</dimen>
+    <dimen name="icon_view_height">40dp</dimen>
+    <!-- News item dimensions-->
+    <dimen name="image_view_height">230dp</dimen>
+    <dimen name="icon_vertical_dimensions">40dp</dimen>
+    <dimen name="icon_margin">12dp</dimen>
+    <dimen name="shade_padding_bottom">10dp</dimen>
+    <dimen name="title_view_padding">15dp</dimen>
+    <dimen name="title_text_size">18sp</dimen>
+    <!-- Provider list dimensions-->
+    <dimen name="provider_vertical_margins">10dp</dimen>
+    <dimen name="provider_horizontal_margins">6dp</dimen>
+    <dimen name="provider_layout_height">110dp</dimen>
+    <dimen name="provider_name_layout_height">100dp</dimen>
+    <dimen name="provider_name_text_size">34sp</dimen>
+    <dimen name="provider_textview_margin_bottom">3dp</dimen>
+    <dimen name="provider_description_text_size">14sp</dimen>
 </resources>

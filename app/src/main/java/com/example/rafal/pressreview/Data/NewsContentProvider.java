@@ -26,9 +26,14 @@ public class NewsContentProvider extends ContentProvider {
     public static final int PROVIDERS = 200;
     public static final int PROVIDERS_ID = 201;
 
+    public static final String PATH_PROVIDERS_NEWS = "providerNews";
+    public static final int PROVIDERS_NEWS = 300;
+    public static final int PROVIDERS_ID_NEWS = 301;
+
+
     private static final UriMatcher uriMatcher = buildUriMatcher();
 
-    public static UriMatcher buildUriMatcher(){
+    public static UriMatcher buildUriMatcher() {
 
         UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -37,6 +42,9 @@ public class NewsContentProvider extends ContentProvider {
 
         matcher.addURI(CONTENT_AUTHORITY, PATH_PROVIDERS, PROVIDERS);
         matcher.addURI(CONTENT_AUTHORITY, PATH_PROVIDERS + "/#", PROVIDERS_ID);
+
+        matcher.addURI(CONTENT_AUTHORITY, PATH_PROVIDERS_NEWS, PROVIDERS_NEWS);
+        matcher.addURI(CONTENT_AUTHORITY, PATH_PROVIDERS_NEWS + "/#", PROVIDERS_ID_NEWS);
 
         return matcher;
     }
@@ -53,12 +61,16 @@ public class NewsContentProvider extends ContentProvider {
 
         SQLiteQueryBuilder providerQueryBuilder = new SQLiteQueryBuilder();
         SQLiteQueryBuilder newsQueryBuilder = new SQLiteQueryBuilder();
+        SQLiteQueryBuilder providerNewsQueryBuilder = new SQLiteQueryBuilder();
+
         newsQueryBuilder.setTables(NewsDatabaseHelper.TABLE_NAME);
         providerQueryBuilder.setTables(NewsDatabaseHelper.PROVIDER_TABLE_NAME);
+        providerNewsQueryBuilder.setTables(NewsDatabaseHelper.PROVIDER_NEWS_TABLE_NAME);
+
         Cursor cursor = null;
         SQLiteDatabase db = newsDatabaseHelper.getWritableDatabase();
         int uriType = uriMatcher.match(uri);
-        switch (uriType){
+        switch (uriType) {
             case NEWS:
                 cursor = newsQueryBuilder.query(db, projection, selection,
                         selectionArgs, null, null, sortOrder);
@@ -72,6 +84,13 @@ public class NewsContentProvider extends ContentProvider {
                 break;
             case PROVIDERS_ID:
                 providerQueryBuilder.appendWhere(NewsDatabaseHelper.ID + "=" + uri.getLastPathSegment());
+                break;
+            case PROVIDERS_NEWS:
+                cursor = providerNewsQueryBuilder.query(db, projection, selection,
+                        selectionArgs, null, null, sortOrder);
+                break;
+            case PROVIDERS_ID_NEWS:
+                providerNewsQueryBuilder.appendWhere(NewsDatabaseHelper.ID + "=" + uri.getLastPathSegment());
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -94,7 +113,7 @@ public class NewsContentProvider extends ContentProvider {
         Uri returnUri;
         SQLiteDatabase db = newsDatabaseHelper.getWritableDatabase();
         long id = 0;
-        switch (uriType){
+        switch (uriType) {
             case NEWS:
                 id = db.insert(NewsDatabaseHelper.TABLE_NAME, null, values);
                 returnUri = Uri.parse(PATH_NEWS + "/" + id);
@@ -102,6 +121,10 @@ public class NewsContentProvider extends ContentProvider {
             case PROVIDERS:
                 id = db.insert(NewsDatabaseHelper.PROVIDER_TABLE_NAME, null, values);
                 returnUri = Uri.parse(PATH_PROVIDERS + "/" + id);
+                break;
+            case PROVIDERS_NEWS:
+                id = db.insert(NewsDatabaseHelper.PROVIDER_NEWS_TABLE_NAME, null, values);
+                returnUri = Uri.parse(PATH_PROVIDERS_NEWS + "/" + id);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);

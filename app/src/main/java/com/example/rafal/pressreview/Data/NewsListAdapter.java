@@ -57,8 +57,6 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
 
         //setting icons
         Iconize.iconize(mCursor.getString(3), holder, resources);
-
-
   }
 
     @Override
@@ -96,29 +94,4 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
             getAppContext().startActivity(intent);
         }
     }
-    /*public void iconize(String urlExtract, ViewHolder holder){
-        if(urlExtract.contains("bbc")) {
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.bbc_news));
-        } else if (urlExtract.contains("cnn")){
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.cnn_news));
-        } else if (urlExtract.contains("independent")){
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.independent_news));
-        } else if (urlExtract.contains("dailymail")) {
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.daily_mail_news));
-        } else if (urlExtract.contains("indepenent")){
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.independent_news));
-        } else  if (urlExtract.contains("economist")){
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.economist_news));
-        } else if (urlExtract.contains("nytimes")){
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.newyorktimes_news));
-        } else if (urlExtract.contains("wsj")){
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.wallstreet_news));
-        } else if (urlExtract.contains("washingtonpost")){
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.washingtonpost_news));
-        } else  if (urlExtract.contains("aljazeera")){
-            holder.providerImageView.setImageDrawable(resources.getDrawable(R.drawable.aljazeera_news));
-        } else {
-            holder.providerImageView.setImageDrawable(null);
-        }
-    }*/
 }
