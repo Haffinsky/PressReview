@@ -103,4 +103,13 @@ public class NewsDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DROP_PROVIDER_NEWS_TABLE);
         db.execSQL(SQL_CREATE_PROVIDER_NEWS_TABLE);
     }
+    public void dbCleanup(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(SQL_DROP_NEWS_TABLE);
+        db.execSQL(SQL_CREATE_NEWS_TABLE);
+        db.execSQL(SQL_DROP_PROVIDER_TABLE);
+        db.execSQL(SQL_CREATE_PROVIDER_TABLE);
+        db.execSQL(SQL_DROP_PROVIDER_NEWS_TABLE);
+        db.execSQL(SQL_CREATE_PROVIDER_NEWS_TABLE);
+    }
 }

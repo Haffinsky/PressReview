@@ -27,9 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         newsDatabaseHelper = new NewsDatabaseHelper(getAppContext());
-        newsDatabaseHelper.dropAndRecreateNewsTable();
-        newsDatabaseHelper.dropAndRecreateProviderTable();
-        newsDatabaseHelper.dropAndRecreateProviderNewsTable();
+        newsDatabaseHelper.dbCleanup();
 
         setContentView(R.layout.activity_main);
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -84,11 +82,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop(){
         super.onStop();
-        Log.v("ON STOP", "ACTTIVITY STOPPED");
         newsDatabaseHelper = new NewsDatabaseHelper(getAppContext());
-        newsDatabaseHelper.dropAndRecreateNewsTable();
-        newsDatabaseHelper.dropAndRecreateProviderTable();
-        newsDatabaseHelper.dropAndRecreateProviderNewsTable();
+        newsDatabaseHelper.dbCleanup();
     }
 }
 
